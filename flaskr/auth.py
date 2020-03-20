@@ -35,7 +35,7 @@ def register():
 
         flash(error)
 
-    return render_template('auth/register.html')
+    return render_template("auth/register.html")
 
 
 @bp.route('/login', methods=('GET', 'POST'))
@@ -56,7 +56,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return redirect(url_for('blog.index'))
         flash(error)
 
     return render_template('auth/login.html')
@@ -72,7 +72,6 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
-    return render_template('auth/register.html')
 
 
 @bp.route('/logout')
